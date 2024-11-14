@@ -1,14 +1,22 @@
 package main
 
 import (
-    "fmt"
-    "context"
+	"fmt"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func handler(ctx context.Context, event interface{}) (interface{}, error) {
-    fmt.Println("Hello from Lambda!")
-    return map[string]interface{}{
-        "statusCode": 200,
-        "body":       "Hello Addfly",
-    }, nil
+func main() {
+	lambda.Start(handler)
+}
+
+func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	fmt.Println("Hello Addfly")
+
+	resposne := events.APIGatewayProxyResponse{
+		StatusCode: 200,
+	}
+
+	return resposne, nil
 }
